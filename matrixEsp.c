@@ -123,6 +123,7 @@ void apaga_matriz(MatEsparsa* mat) {
     free(mat);
 }
 
+/*A transposta de uma matriz é quando trocamos as colunas por linhas*/
 MatEsparsa* cria_transposta(MatEsparsa* mat) {
     MatEsparsa* transposta = criar_matriz(mat->qtd_colunas, mat->qtd_linhas);
     TipoLinha* linha_atual = mat->inicio;
@@ -136,7 +137,7 @@ MatEsparsa* cria_transposta(MatEsparsa* mat) {
     }
     return transposta;
 }
-
+/*Para somar duas matrizes de mesmas dimensões é apenas somar os elementos das posições correspondentes*/
 MatEsparsa* soma_matrizes(MatEsparsa* A, MatEsparsa* B) {
     if (A->qtd_linhas != B->qtd_linhas || A->qtd_colunas != B->qtd_colunas) {
         return NULL;
@@ -217,44 +218,32 @@ void imprimir_matriz(MatEsparsa* mat) {
 
 int main() {
     MatEsparsa* A = criar_matriz(3, 3); 
-    MatEsparsa* B = criar_matriz(3, 3); 
 
     inserir_elemento(A, 0, 0, 1); 
     inserir_elemento(A, 1, 1, 2); 
-    inserir_elemento(A, 2, 2, 3); 
+    inserir_elemento(A, 2, 1, 3); 
 
-    inserir_elemento(B, 0, 1, 4); 
-    inserir_elemento(B, 1, 2, 5); 
-    inserir_elemento(B, 2, 0, 6);
+ 
 
     printf("Matriz A:\n");
     imprimir_matriz(A);
 
-    printf("Matriz B:\n");
-    imprimir_matriz(B);
-
-    MatEsparsa* soma = soma_matrizes(A, B);
-    printf("Soma de A e B:\n");
-    imprimir_matriz(soma);
-
-    MatEsparsa* multiplicacao = multiplica_matrizes(A, B);
-    printf("Multiplicacao de A e B:\n");
-    imprimir_matriz(multiplicacao);
-
-    MatEsparsa* transposta = cria_transposta(A);
+     MatEsparsa* transposta = cria_transposta(A);
     printf("Transposta de A:\n");
     imprimir_matriz(transposta);
 
-    MatEsparsa* transpostaB = cria_transposta(B);
-    printf("Transposta de B:\n");
-    imprimir_matriz(transpostaB);
+    MatEsparsa* soma = soma_matrizes(A, transposta);
+    printf("Soma de A e B:\n");
+    imprimir_matriz(soma);
+
+    MatEsparsa* multiplicacao = multiplica_matrizes(A, transposta);
+    printf("Multiplicacao de A e B:\n");
+    imprimir_matriz(multiplicacao);
 
     apaga_matriz(A);
-    apaga_matriz(B);
     apaga_matriz(soma);
     apaga_matriz(multiplicacao);
     apaga_matriz(transposta);
-    apaga_matriz(transpostaB);
 
     return 0;
 }
