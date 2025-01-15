@@ -68,7 +68,7 @@ int buscar_pos(int linha, int coluna, Tipo_Mat_Esparsa* mat) {
     if (elem_atual == NULL || elem_atual->linha != linha) {
         return 0;
     }
-
+    
     return elem_atual->valor;
 }
 
@@ -82,11 +82,13 @@ void inserir_elemento(Tipo_Mat_Esparsa* mat, int linha, int coluna, int valor) {
 
     if (atual == NULL || atual->ID_Coluna != coluna) {
         tipo_linha* nova_linha = criar_linha(coluna);
+        //aqui ele verifica se o index elemento ja tem um elemento, caso ja tenha algo ele enta no else
         if (anterior == NULL) {
             mat->inicio = nova_linha;
         } else {
             anterior->proximo = nova_linha;
         }
+        //aqui att os ponteiros 
         nova_linha->proximo = atual;
         atual = nova_linha;
     }
@@ -96,7 +98,7 @@ void inserir_elemento(Tipo_Mat_Esparsa* mat, int linha, int coluna, int valor) {
         elem_ant = elem_atual;
         elem_atual = elem_atual->proximo;
     }
-
+    // ja aqui fazemos a msm coisa só que para a coluna e para o valor 
     if (elem_atual == NULL || elem_atual->linha != linha) {
         tipo_elemento* novo_elem = criar_elemento(valor, linha);
         if (elem_ant == NULL) {

@@ -1,3 +1,4 @@
+/*Aluno: Guilherme Macedo Baggio*/
 #include <stdio.h>
 #include <stdlib.h>
 #include"matriz_esparsa.h"
