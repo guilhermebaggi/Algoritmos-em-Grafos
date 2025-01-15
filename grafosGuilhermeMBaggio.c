@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#include "grafos.h"
+#include "grafosGuilhermeMBaggio.h"
 
 int main() {
     grafo *g = criar_grafo();
